@@ -1,3 +1,277 @@
-<script>
-  window.location.href = "./score-9-16.html";
-</script>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Padbol Score Menu</title>
+
+  <style>
+    :root {
+      --blue: #06275f;
+      --blue2: #0b3ea8;
+      --red: #e30613;
+      --yellow: #ffd400;
+      --dark: #020817;
+      --white: #ffffff;
+      --muted: #aeb8d6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(rgba(2, 8, 23, 0.78), rgba(2, 8, 23, 0.92)),
+        radial-gradient(circle at top left, #164ed8 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #e30613 0%, transparent 30%),
+        #020817;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1180px;
+    }
+
+    .top {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 74px);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1 span {
+      color: var(--yellow);
+    }
+
+    .subtitle {
+      margin: 18px auto 0;
+      max-width: 720px;
+      color: #dbe4ff;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      min-height: 250px;
+      border-radius: 28px;
+      padding: 24px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(255, 212, 0, 0.65);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.20), rgba(255,255,255,0.06));
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: auto -40px -70px auto;
+      width: 180px;
+      height: 180px;
+      background: var(--red);
+      border-radius: 999px;
+      filter: blur(10px);
+      opacity: 0.45;
+      z-index: 0;
+    }
+
+    .card.blue::before {
+      background: #1463ff;
+    }
+
+    .card.yellow::before {
+      background: #ffd400;
+    }
+
+    .card.dark::before {
+      background: #ffffff;
+      opacity: 0.18;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .ratio {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: var(--yellow);
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      margin: 12px 0 0;
+      color: #c9d4f5;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .btn {
+      margin-top: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: var(--red);
+      color: white;
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .admin .btn {
+      background: var(--yellow);
+      color: #020817;
+    }
+
+    .footer {
+      margin-top: 26px;
+      text-align: center;
+      color: #8fa2d5;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1000px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      body {
+        padding: 18px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 220px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="top">
+      <div class="badge">FRP Scoreboard Control</div>
+      <h1>Padbol <span>Score</span></h1>
+      <p class="subtitle">
+        Alege formatul pentru filmare sau intră în panoul de administrare ca să schimbi scorul live.
+      </p>
+    </section>
+
+    <section class="grid">
+      <a class="card blue" href="score-9-16.html">
+        <div>
+          <div class="ratio">9:16</div>
+          <h2>Reels / Shorts</h2>
+          <p>Format vertical pentru Instagram Reels, TikTok și YouTube Shorts.</p>
+        </div>
+        <span class="btn">Deschide formatul</span>
+      </a>
+
+      <a class="card" href="score-16-9.html">
+        <div>
+          <div class="ratio">16:9</div>
+          <h2>YouTube / TV</h2>
+          <p>Format landscape pentru YouTube, Facebook video sau ecran mare.</p>
+        </div>
+        <span class="btn">Deschide formatul</span>
+      </a>
+
+      <a class="card yellow" href="score-1-1.html">
+        <div>
+          <div class="ratio">1:1</div>
+          <h2>Square Post</h2>
+          <p>Format pătrat pentru Instagram, Facebook și postări feed.</p>
+        </div>
+        <span class="btn">Deschide formatul</span>
+      </a>
+
+      <a class="card dark admin" href="admin-score.html">
+        <div>
+          <div class="ratio">ADM</div>
+          <h2>Admin Score</h2>
+          <p>Panou simplu pentru modificarea scorului live. Parola: admin123.</p>
+        </div>
+        <span class="btn">Intră în admin</span>
+      </a>
+    </section>
+
+    <div class="footer">
+      Pentru filmare: deschide pagina de scor într-un tab separat, apoi schimbă scorul din admin.
+    </div>
+  </main>
+</body>
+</html>
